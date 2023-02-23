@@ -46,6 +46,7 @@ const useFetchData = () => {
             maps: item.maps,
             capitalPos: item.capitalInfo.latlng ? item.capitalInfo.latlng : [],
             countryPos: item.latlng ? item.latlng : [],
+            demonyms: item.demonyms ? item.demonyms["eng"].f : "",
           };
         });
 

@@ -3,16 +3,17 @@ import { useLocation } from "react-router-dom";
 import MapIcon from "@mui/icons-material/Map";
 import GroupsIcon from "@mui/icons-material/Groups";
 import PublicIcon from "@mui/icons-material/Public";
+import PersonIcon from "@mui/icons-material/Person";
 import LanguageIcon from "@mui/icons-material/Language";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import { Avatar, Box, Card, CardMedia, Typography } from "@mui/material";
+import { Avatar, Box, Card, Typography } from "@mui/material";
 import useStyle from "./style";
 import Map from "./Map";
 const CountryDetails = () => {
-  const classes = useStyle();
   const location = useLocation();
   const country = location.state;
+  const classes = useStyle();
   const countryInfo = [
     {
       title: "Continent",
@@ -33,6 +34,11 @@ const CountryDetails = () => {
       title: "Population",
       value: country.population,
       icon: <GroupsIcon fontSize="large" className={classes.icon} />,
+    },
+    {
+      title: "Demonym",
+      value: country.demonyms,
+      icon: <PersonIcon fontSize="large" className={classes.icon} />,
     },
     {
       title: "Languages",
@@ -59,32 +65,68 @@ const CountryDetails = () => {
 
       <div className={classes.InfoContainer}>
         <Card className={classes.cardContainer}>
-          <CardMedia
-            component="img"
-            image={country.flag}
-            alt={country.name}
+          <Box
             className={classes.cardMedia}
-          />
+            style={{
+              backgroundImage: `url(${country.flag})`,
+              backgroundPosition: "center",
+            }}
+          ></Box>
 
-          <Box className={classes.infoBox}>
-            {countryInfo.map((item, index) => {
-              return (
-                <Box className={classes.containerBox} key={index}>
-                  <Box className={classes.avatarBox}>
-                    <Avatar className={classes.avatar}>{item.icon}</Avatar>
-                  </Box>
-                  <Box className={classes.boxTitleValue}>
-                    <Box component="span">
-                      {" "}
-                      <span className={classes.spanTitle}>{item.title} :</span>
+          <Box display="flex">
+            <Box className={classes.infoBoxLeft}>
+              {countryInfo.map((item, index) => {
+                if (index % 2 === 0) {
+                  return (
+                    <Box className={classes.containerBox} key={index}>
+                      <Box className={classes.avatarBox}>
+                        <Avatar className={classes.avatar}>{item.icon}</Avatar>
+                      </Box>
+                      <Box className={classes.boxTitleValue}>
+                        <Box component="span">
+                          {" "}
+                          <span className={classes.spanTitle}>
+                            {item.title} :
+                          </span>
+                        </Box>
+                        <Box component="p">
+                          <span className={classes.spanValue}>
+                            {item.value}
+                          </span>
+                        </Box>
+                      </Box>
                     </Box>
-                    <Box component="p">
-                      <span className={classes.spanValue}>{item.value}</span>
+                  );
+                }
+              })}
+            </Box>
+
+            <Box className={classes.infoBoxRight}>
+              {countryInfo.map((item, index) => {
+                if (index % 2 !== 0) {
+                  return (
+                    <Box className={classes.containerBox} key={index}>
+                      <Box className={classes.avatarBox}>
+                        <Avatar className={classes.avatar}>{item.icon}</Avatar>
+                      </Box>
+                      <Box className={classes.boxTitleValue}>
+                        <Box component="span">
+                          {" "}
+                          <span className={classes.spanTitle}>
+                            {item.title} :
+                          </span>
+                        </Box>
+                        <Box component="p">
+                          <span className={classes.spanValue}>
+                            {item.value}
+                          </span>
+                        </Box>
+                      </Box>
                     </Box>
-                  </Box>
-                </Box>
-              );
-            })}
+                  );
+                }
+              })}
+            </Box>
           </Box>
         </Card>
       </div>

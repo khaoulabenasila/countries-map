@@ -1,11 +1,15 @@
 import { makeStyles } from "@mui/styles";
 const useStyle = makeStyles(() => ({
-  countryOutline: {
-    color: "#61DBFB !important",
-    weight: 5,
-    fillColor: "red !important",
-    fillOpacity: 1,
-    opacity: 1,
+  popupText: {
+    fontSize: "1.2rem",
+    color: "#060047",
+    fontWeight: "bold",
+  },
+  mapContainer: {
+    height: "100vh",
+    margin: "auto",
+    width: "85%",
+    marginBottom: "20px",
   },
 }));
 
